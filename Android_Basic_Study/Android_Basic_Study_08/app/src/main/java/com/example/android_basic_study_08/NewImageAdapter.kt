@@ -17,7 +17,6 @@ class NewImageAdapter () : RecyclerView.Adapter<NewImageAdapter.ViewHolder>() {
     inner class ViewHolder(private val binding: ItemNewimageBinding): RecyclerView.ViewHolder(binding.root) {
         fun bindItems(items: NewImage) {
             binding.tvNewImage.text = items.description.toString()
-            Log.d("TAG",items.description.toString())
             Glide.with(binding.ivNewImage)
                 .load(items.urls)
                 .transform(RoundedCorners(40))

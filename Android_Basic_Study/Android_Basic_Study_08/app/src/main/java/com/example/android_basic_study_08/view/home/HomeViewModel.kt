@@ -14,11 +14,11 @@ class HomeViewModel: ViewModel(){
     private var _newState = MutableLiveData<UiState<List<NewImage>>>(UiState.Loading)
     val newState get() = _newState
 
-    fun getPhotos() {
+    fun getPhotos(currentPage: Int) {
         _newState.value = UiState.Loading
 
         viewModelScope.launch {
-            photoRepositoryImpl.getPhotoList(0)
+            photoRepositoryImpl.getPhotoList(currentPage)
                 .onSuccess { _newState.value = UiState.Success(it) }
                 .onFailure {
                     it.printStackTrace()
