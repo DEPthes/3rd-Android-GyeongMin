@@ -21,10 +21,15 @@ class NewImageAdapter () : RecyclerView.Adapter<NewImageAdapter.ViewHolder>() {
                 .load(items.urls)
                 .transform(RoundedCorners(40))
                 .into(binding.ivNewImage)
+
+            itemView.setOnClickListener {
+                itemClickListener.onItemClick(items.id)
+            }
         }
     }
+
     interface onItemClickListener {
-        fun onItemClick(position: Int)
+        fun onItemClick(id: String)
     }
 
     private lateinit var itemClickListener: onItemClickListener
@@ -38,9 +43,6 @@ class NewImageAdapter () : RecyclerView.Adapter<NewImageAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: NewImageAdapter.ViewHolder, position: Int) {
-        holder.itemView.setOnClickListener {
-            itemClickListener.onItemClick(position)
-        }
         holder.bindItems(items[position])
     }
 

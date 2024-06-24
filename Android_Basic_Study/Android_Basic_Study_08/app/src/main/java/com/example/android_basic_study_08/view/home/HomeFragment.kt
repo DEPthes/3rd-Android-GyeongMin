@@ -15,6 +15,7 @@ import com.example.android_basic_study_08.BookmarkAdapter
 import com.example.android_basic_study_08.NewImageAdapter
 import com.example.android_basic_study_08.databinding.FragmentHomeBinding
 import com.example.android_basic_study_08.utils.UiState
+import com.example.android_basic_study_08.view.detail.DetailFragment
 
 class HomeFragment: Fragment(){
     private var _binding: FragmentHomeBinding? = null
@@ -45,7 +46,14 @@ class HomeFragment: Fragment(){
         binding.recyclerviewBookmark.adapter = bookmarkAdapter
         binding.recyclerviewBookmark.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
-        newImageAdapter = NewImageAdapter()
+        newImageAdapter = NewImageAdapter().apply {
+            setItemClickListener(object : NewImageAdapter.onItemClickListener {
+                override fun onItemClick(id: String) {
+                    DetailFragment(id).show(requireActivity().supportFragmentManager, "")
+                }
+
+            })
+        }
         binding.recyclerviewNewImage.adapter = newImageAdapter
         binding.recyclerviewNewImage.layoutManager = GridLayoutManager(requireContext(), 2)
 

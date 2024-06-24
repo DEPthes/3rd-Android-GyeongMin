@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "BookmarkImage")
 
 data class BookmarkImage (
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     val id : String,
     @ColumnInfo
     val urls: String
