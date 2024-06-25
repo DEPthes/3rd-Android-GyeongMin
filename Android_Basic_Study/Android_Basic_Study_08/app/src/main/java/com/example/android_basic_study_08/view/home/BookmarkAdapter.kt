@@ -1,4 +1,4 @@
-package com.example.android_basic_study_08
+package com.example.android_basic_study_08.view.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -16,10 +16,13 @@ class BookmarkAdapter() : RecyclerView.Adapter<BookmarkAdapter.ViewHolder>() {
                 .load(items.urls)
                 .transform(RoundedCorners(40))
                 .into(binding.imageBookmark)
+            itemView.setOnClickListener {
+                itemClickListener.onItemClick(items.id)
+            }
         }
     }
     interface onItemClickListener {
-        fun onItemClick(position: Int)
+        fun onItemClick(id: String)
     }
 
     private lateinit var itemClickListener: onItemClickListener
@@ -32,10 +35,7 @@ class BookmarkAdapter() : RecyclerView.Adapter<BookmarkAdapter.ViewHolder>() {
         return ViewHolder(ItemBookmarkBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
 
-    override fun onBindViewHolder(holder: BookmarkAdapter.ViewHolder, position: Int) {
-        holder.itemView.setOnClickListener {
-            itemClickListener.onItemClick(position)
-        }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindItems(items[position])
     }
 

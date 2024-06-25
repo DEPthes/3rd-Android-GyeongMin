@@ -27,12 +27,15 @@
         app:layout_constraintStart_toStartOf="parent"
         android:text="북마크"
         android:textSize="16sp"
-        android:textColor="@color/black"/>
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_margin="20dp"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerviewBookmark"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/txtBookmark" />
+        app:layout_constraintTop_toBottomOf="@id/txtBookmark"
+        android:layout_marginTop="10dp"/>
     <TextView
         android:id="@+id/txtNewImage"
         android:layout_width="wrap_content"
@@ -41,7 +44,9 @@
         app:layout_constraintStart_toStartOf="parent"
         android:text="최신 이미지"
         android:textSize="16sp"
-        android:textColor="@color/black"/>
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_margin="20dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerviewNewImage"
@@ -49,5 +54,6 @@
         android:layout_height="0dp"
         android:paddingHorizontal="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtNewImage" />
+        app:layout_constraintTop_toBottomOf="@id/txtNewImage"
+        android:layout_marginTop="10dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

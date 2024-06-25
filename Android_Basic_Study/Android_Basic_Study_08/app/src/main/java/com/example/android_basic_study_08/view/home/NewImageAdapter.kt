@@ -1,4 +1,4 @@
-package com.example.android_basic_study_08
+package com.example.android_basic_study_08.view.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -38,7 +38,7 @@ class NewImageAdapter () : RecyclerView.Adapter<NewImageAdapter.ViewHolder>() {
         return ViewHolder(ItemNewimageBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
 
-    override fun onBindViewHolder(holder: NewImageAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindItems(items[position])
     }
 

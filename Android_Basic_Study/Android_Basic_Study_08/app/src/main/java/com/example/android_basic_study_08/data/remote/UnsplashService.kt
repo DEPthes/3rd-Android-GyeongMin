@@ -2,6 +2,7 @@ package com.example.android_basic_study_08.data.remote
 
 import com.example.android_basic_study_08.data.remote.model.PhotoDetailDTO
 import com.example.android_basic_study_08.data.remote.model.PhotoListDTO
+import com.example.android_basic_study_08.data.remote.model.PhotoRandomDTO
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -17,4 +18,9 @@ interface UnsplashService {
     suspend fun getPhotoDetail(
         @Path("id") id: String
     ): Response<PhotoDetailDTO>
+
+    @GET("/photos/random")
+    suspend fun getPhotoRandom(
+        @Query("count") count: Int
+    ): Response<PhotoRandomDTO>
 }

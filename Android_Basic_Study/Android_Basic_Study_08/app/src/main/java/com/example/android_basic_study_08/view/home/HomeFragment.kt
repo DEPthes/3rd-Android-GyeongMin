@@ -11,8 +11,6 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.android_basic_study_08.BookmarkAdapter
-import com.example.android_basic_study_08.NewImageAdapter
 import com.example.android_basic_study_08.databinding.FragmentHomeBinding
 import com.example.android_basic_study_08.utils.UiState
 import com.example.android_basic_study_08.view.detail.DetailFragment
@@ -42,7 +40,19 @@ class HomeFragment: Fragment(){
 
         observer()
         setupScrollListener()
-        bookmarkAdapter = BookmarkAdapter()
+        bookmarkAdapter = BookmarkAdapter().apply {
+            setItemClickListener(object : BookmarkAdapter.onItemClickListener {
+                override fun onItemClick(id: String) {
+                    DetailFragment(id).apply {
+                        setBookmarkClickListener(object : DetailFragment.OnBookmarkClickListener {
+                            override fun onBookmarkClick() {
+                                homeViewModel.getBookmarks(requireContext())
+                            }
+                        })
+                    }.show(requireActivity().supportFragmentManager, "")
+                }
+            })
+        }
         binding.recyclerviewBookmark.adapter = bookmarkAdapter
         binding.recyclerviewBookmark.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
@@ -117,6 +127,13 @@ class HomeFragment: Fragment(){
                 is UiState.Success -> {
                     Log.d("TAG","Bookmark success")
                     bookmarkAdapter.setData(it.data)
+                    if (it.data.isNullOrEmpty()) {
+                        binding.txtBookmark.visibility = View.GONE
+                        binding.recyclerviewBookmark.visibility = View.GONE
+                    } else {
+                        binding.txtBookmark.visibility = View.VISIBLE
+                        binding.recyclerviewBookmark.visibility = View.VISIBLE
+                    }
                 }
             }
         }
