@@ -1,7 +1,6 @@
 package com.example.android_basic_study_08.data.local
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 
@@ -16,6 +15,6 @@ interface BookmarkDAO {
     @Insert
     fun insertBookmark(bookmarkImage: BookmarkImage)
 
-    @Delete
-    fun deleteBookmark(bookmarkImage: BookmarkImage)
+    @Query("DELETE FROM BookmarkImage WHERE id = :id ")
+    fun deleteBookmark(id: String)
 }

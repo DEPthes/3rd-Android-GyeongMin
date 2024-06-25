@@ -1,19 +1,20 @@
 package com.example.android_basic_study_08
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.example.android_basic_study_08.data.local.BookmarkImage
 import com.example.android_basic_study_08.databinding.ItemBookmarkBinding
 
 class BookmarkAdapter() : RecyclerView.Adapter<BookmarkAdapter.ViewHolder>() {
-    val items = mutableListOf<String>("1", "2", "3")
+    var items = mutableListOf<BookmarkImage>()
     inner class ViewHolder(private val binding: ItemBookmarkBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bindItems(items: String) {
+        fun bindItems(items: BookmarkImage) {
             Glide.with(binding.imageBookmark)
-                .load("https://i.namu.wiki/i/eFwZuvkmTOGdMQjTDUsyl8HqgCrZlQzVm2XWIubFhTbJ4t7YOaLCT4mwepCi0WwJsrX6uZ2b1Gi8DHqnIEvnDab4x35GZKyV1A3T2mNMx2QV5gYmcto2DZKiy7hU0b2drjvtPm2-qstm291hLGEw2Q.webp")
+                .load(items.urls)
+                .transform(RoundedCorners(40))
                 .into(binding.imageBookmark)
         }
     }
@@ -42,4 +43,8 @@ class BookmarkAdapter() : RecyclerView.Adapter<BookmarkAdapter.ViewHolder>() {
         return items.count()
     }
 
+    fun setData(bookmarkList: List<BookmarkImage>) {
+        items = bookmarkList.toMutableList()
+        notifyDataSetChanged()
+    }
 }

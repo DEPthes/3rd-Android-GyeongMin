@@ -49,15 +49,21 @@ class HomeFragment: Fragment(){
         newImageAdapter = NewImageAdapter().apply {
             setItemClickListener(object : NewImageAdapter.onItemClickListener {
                 override fun onItemClick(id: String) {
-                    DetailFragment(id).show(requireActivity().supportFragmentManager, "")
+                    DetailFragment(id).apply {
+                        setBookmarkClickListener(object : DetailFragment.OnBookmarkClickListener {
+                            override fun onBookmarkClick() {
+                                homeViewModel.getBookmarks(requireContext())
+                            }
+                        })
+                    }.show(requireActivity().supportFragmentManager, "")
                 }
-
             })
         }
         binding.recyclerviewNewImage.adapter = newImageAdapter
         binding.recyclerviewNewImage.layoutManager = GridLayoutManager(requireContext(), 2)
 
         homeViewModel.getPhotos(currentPage)
+        homeViewModel.getBookmarks(requireContext())
     }
 
     private fun setupScrollListener() {
@@ -85,17 +91,32 @@ class HomeFragment: Fragment(){
         homeViewModel.newState.observe(viewLifecycleOwner) {
             when(it) {
                 is UiState.Failure -> {
-                    Log.d("TAG","fail")
+                    Log.d("TAG","NewImage fail")
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                     isLoading = false
                 }
                 is UiState.Loading -> {
-                    Log.d("TAG","loading")
+                    Log.d("TAG","NewImage loading")
                 }
                 is UiState.Success -> {
-                    Log.d("TAG","success")
+                    Log.d("TAG","NewImage success")
                     newImageAdapter.addItem(it.data)
                     isLoading = false
+                }
+            }
+        }
+        homeViewModel.bookmarkState.observe(viewLifecycleOwner) {
+            when(it) {
+                is UiState.Failure -> {
+                    Log.d("TAG","Bookmark fail")
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+                is UiState.Loading -> {
+                    Log.d("TAG","Bookmark loading")
+                }
+                is UiState.Success -> {
+                    Log.d("TAG","Bookmark success")
+                    bookmarkAdapter.setData(it.data)
                 }
             }
         }

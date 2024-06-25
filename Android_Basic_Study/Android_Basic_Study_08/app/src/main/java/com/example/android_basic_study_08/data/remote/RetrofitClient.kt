@@ -1,6 +1,5 @@
 package com.example.android_basic_study_08.data.remote
 
-import com.facebook.shimmer.BuildConfig
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

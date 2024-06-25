@@ -1,16 +1,12 @@
 package com.example.android_basic_study_08
 
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.RoundedCorner
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.example.android_basic_study_08.databinding.ItemBookmarkBinding
 import com.example.android_basic_study_08.databinding.ItemNewimageBinding
 import com.example.android_basic_study_08.entity.NewImage
-import kotlin.math.log
 
 class NewImageAdapter () : RecyclerView.Adapter<NewImageAdapter.ViewHolder>() {
     val items = mutableListOf<NewImage>()

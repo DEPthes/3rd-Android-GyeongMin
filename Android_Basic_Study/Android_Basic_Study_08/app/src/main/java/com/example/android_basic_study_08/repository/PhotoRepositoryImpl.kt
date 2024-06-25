@@ -5,7 +5,6 @@ import com.example.android_basic_study_08.data.remote.RetrofitClient
 import com.example.android_basic_study_08.data.remote.UnsplashService
 import com.example.android_basic_study_08.entity.DetailImage
 import com.example.android_basic_study_08.entity.NewImage
-import kotlin.Exception
 
 class PhotoRepositoryImpl: PhotoRepository {
     private val service = RetrofitClient.getInstance().create(UnsplashService::class.java)

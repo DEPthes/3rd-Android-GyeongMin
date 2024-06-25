@@ -1,7 +1,7 @@
 package com.example.android_basic_study_08
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.android_basic_study_08.databinding.ActivityMainBinding
 import com.example.android_basic_study_08.view.card.CardFragment
